@@ -41,5 +41,19 @@ pipeline {
                 '''
             }
         }
+
+        stage('Upload to FTP') {
+            steps {
+                sh '''
+                    echo "open 192.168.0.22" > ftp_commands.txt
+                    echo "user ivan alumne" >> ftp_commands.txt
+                    echo "binary" >> ftp_commands.txt
+                    echo "cd /" >> ftp_commands.txt
+                    echo "put target/app.jar" >> ftp_commands.txt
+                    echo "bye" >> ftp_commands.txt
+                    ftp -n < ftp_commands.txt
+                '''
+            }
+        }
     }
 }
