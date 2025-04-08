@@ -1,22 +1,4 @@
-pipeline {
-    agent any
-    
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/iesivanhicaa/ivanJenkins.git'
-            }
-        }
-        
-        stage('Compile') {
-            steps {
-                sh '''
-                    rm -rf target
-                    mkdir -p target/test-classes
-                    javac -d target src/app/*.java
-                '''
-            }
-        }
+
 
         stage('Test') {
             steps {
@@ -41,9 +23,5 @@ pipeline {
                 '''
             }
         }
-    }
-}
-
-
     }
 }
